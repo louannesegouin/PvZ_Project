@@ -1,4 +1,4 @@
-package com.epf.PERSISTANCE;
+package com.epf.CORE;
 
 import com.epf.CORE.Zombie;
 import java.util.List;
