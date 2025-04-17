@@ -2,7 +2,8 @@ package com.epf;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import com.epf.PERSISTANCE.DataBaseConfiguration;
+
+import com.epf.PERSISTANCE.Config.DataBaseConfiguration;
 
 public class Main {
     public static void main(String[] args) {
