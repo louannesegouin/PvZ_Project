@@ -9,11 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/zombies")
+@RequestMapping("/zombies")
 public class ZombieController {
 
     private final ZombieService zombieService;
@@ -53,23 +52,11 @@ public class ZombieController {
     // Récupérer tous les zombies
     @GetMapping
     public ResponseEntity<List<ZombieDTO>> getAllZombies() {
-        List<Zombie> zombies = zombieService.findAll();
+        List<Zombie> zombies = zombieService.getAllZombies();
         List<ZombieDTO> zombieDTOs = zombies.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(zombieDTOs, HttpStatus.OK);
-    }
-
-    // Récupérer un zombie par son ID
-    @GetMapping("/{id}")
-    public ResponseEntity<ZombieDTO> getZombieById(@PathVariable Long id) {
-        Optional<Zombie> zombieOpt = zombieService.findById(id);
-        if (zombieOpt.isPresent()) {
-            ZombieDTO dto = convertToDTO(zombieOpt.get());
-            return new ResponseEntity<>(dto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     // Créer un nouveau zombie

@@ -9,11 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/maps")
+@RequestMapping("/maps")
 public class MapController {
 
     private final MapService mapService;
@@ -45,23 +44,11 @@ public class MapController {
     // Récupérer toutes les maps
     @GetMapping
     public ResponseEntity<List<MapDTO>> getAllMaps() {
-        List<Map> maps = mapService.findAll();
+        List<Map> maps = mapService.getAllMaps();
         List<MapDTO> mapDTOs = maps.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(mapDTOs, HttpStatus.OK);
-    }
-
-    // Récupérer une map par son ID
-    @GetMapping("/{id}")
-    public ResponseEntity<MapDTO> getMapById(@PathVariable Long id) {
-        Optional<Map> mapOptional = mapService.findById(id);
-        if (mapOptional.isPresent()) {
-            MapDTO dto = convertToDTO(mapOptional.get());
-            return new ResponseEntity<>(dto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     // Créer une nouvelle map

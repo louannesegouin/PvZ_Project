@@ -6,7 +6,6 @@ import com.epf.CORE.interfaceService.ZombieService;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ZombieServiceImpl implements ZombieService {
@@ -23,13 +22,8 @@ public class ZombieServiceImpl implements ZombieService {
     }
 
     @Override
-    public Optional<Zombie> findById(Long id) {
-        return zombieDao.findById(id);
-    }
-
-    @Override
-    public List<Zombie> findAll() {
-        return zombieDao.findAll();
+    public List<Zombie> getAllZombies() {
+        return zombieDao.getAllZombies();
     }
 
     @Override

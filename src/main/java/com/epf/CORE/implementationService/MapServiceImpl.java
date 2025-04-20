@@ -5,7 +5,6 @@ import com.epf.PERSISTANCE.InterfaceDAO.MapDao;
 import com.epf.CORE.interfaceService.MapService;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MapServiceImpl implements MapService {
@@ -22,13 +21,8 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public Optional<Map> findById(Long id) {
-        return mapDao.findById(id);
-    }
-
-    @Override
-    public List<Map> findAll() {
-        return mapDao.findAll();
+    public List<Map> getAllMaps() {
+        return mapDao.getAllMaps();
     }
 
     @Override

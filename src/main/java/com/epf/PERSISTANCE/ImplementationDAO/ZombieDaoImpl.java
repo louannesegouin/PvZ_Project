@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ZombieDaoImpl implements ZombieDao {
@@ -25,52 +24,37 @@ public class ZombieDaoImpl implements ZombieDao {
         @Override
         public Zombie mapRow(ResultSet rs, int rowNum) throws SQLException {
             Zombie zombie = new Zombie();
-            zombie.setId(rs.getLong("id"));
-            zombie.setName(rs.getString("name"));
-            zombie.setHealth(rs.getInt("health"));
-            zombie.setDamagepersec(rs.getInt("damagepersec"));
-            zombie.setDamage(rs.getInt("damage"));
-            zombie.setSpeed(rs.getInt("speed"));
-            zombie.setPathimage(rs.getString("pathimage"));
-            zombie.setIdmap(rs.getString("idmap"));
+            zombie.setId(rs.getLong("id_zombie"));
+            zombie.setName(rs.getString("nom"));
+            zombie.setHealth(rs.getInt("point_de_vie"));
+            zombie.setDamagepersec(rs.getInt("attaque_par_seconde"));
+            zombie.setDamage(rs.getInt("degat_attaque"));
+            zombie.setSpeed(rs.getInt("vitesse_de_deplacement"));
+            zombie.setPathimage(rs.getString("chemin_image"));
+            zombie.setIdmap(rs.getString("id_map"));
             return zombie;
         }
     }
 
-    @Override
     public Zombie create(Zombie zombie) {
-        String sql = "INSERT INTO zombies (name, health, damagepersec, damage, speed, pathimage, idmap) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO zombie (nom, point_de_vie, attaque_par_seconde, degat_attaque, vitesse_de_deplacement, chemin_image, id_map) VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, zombie.getName(), zombie.getHealth(), zombie.getDamagepersec(), zombie.getDamage(), zombie.getSpeed(), zombie.getPathimage(), zombie.getIdmap());
         return zombie;
     }
 
-    @Override
-    public Optional<Zombie> findById(Long id) {
-        String sql = "SELECT id, name, health, damagepersec, damage, speed, pathimage, idmap FROM zombies WHERE id = ?";
-        try {
-            Zombie zombie = jdbcTemplate.queryForObject(sql, new ZombieRowMapper(), id);
-            return Optional.ofNullable(zombie);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public List<Zombie> findAll() {
-        String sql = "SELECT id, name, health, damagepersec, damage, speed, pathimage, idmap FROM zombies";
+    public List<Zombie> getAllZombies() {
+        String sql = "SELECT * FROM zombie";
         return jdbcTemplate.query(sql, new ZombieRowMapper());
     }
 
-    @Override
     public Zombie update(Zombie zombie) {
-        String sql = "UPDATE zombies SET name = ?, health = ?, damagepersec = ?, damage = ?, speed = ?, pathimage = ?, idmap = ? WHERE id = ?";
+        String sql = "UPDATE zombie SET nom = ?, point_de_vie = ?, attaque_par_seconde = ?, degat_attaque = ?, vitesse_de_deplacement = ?, chemin_image = ?, id_map = ? WHERE id = ?";
         jdbcTemplate.update(sql, zombie.getName(), zombie.getHealth(), zombie.getDamagepersec(), zombie.getDamage(), zombie.getSpeed(), zombie.getPathimage(), zombie.getIdmap(), zombie.getId());
         return zombie;
     }
 
-    @Override
     public boolean deleteById(Long id) {
-        String sql = "DELETE FROM zombies WHERE id = ?";
+        String sql = "DELETE FROM zombie WHERE id = ?";
         return jdbcTemplate.update(sql, id) > 0;
     }
 }

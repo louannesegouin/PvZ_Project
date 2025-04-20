@@ -5,7 +5,6 @@ import com.epf.PERSISTANCE.InterfaceDAO.PlantDao;
 import com.epf.CORE.interfaceService.PlantService;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PlantServiceImpl implements PlantService {
@@ -16,28 +15,19 @@ public class PlantServiceImpl implements PlantService {
         this.plantDao = plantDao;
     }
 
-    @Override
-    public Plant create(Plant plant) {
-        return plantDao.create(plant);
+    public void create(Plant plant) {
+        plantDao.create(plant);
     }
 
-    @Override
-    public Optional<Plant> findById(Long id) {
-        return plantDao.findById(id);
+    public List<Plant> getAllPlants() {
+        return plantDao.getAllPlants();
     }
 
-    @Override
-    public List<Plant> findAll() {
-        return plantDao.findAll();
+    public void update(Plant plant) {
+        plantDao.update(plant);
     }
 
-    @Override
-    public Plant update(Plant plant) {
-        return plantDao.update(plant);
-    }
-
-    @Override
-    public boolean deleteById(Long id) {
-        return plantDao.deleteById(id);
+    public void delete(Plant plant) {
+        plantDao.delete(plant);
     }
 }

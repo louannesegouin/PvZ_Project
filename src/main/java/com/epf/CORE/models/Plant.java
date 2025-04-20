@@ -1,36 +1,36 @@
 package com.epf.CORE.models;
 
 public class Plant {
-    private Long id;
+    private int idPlant;
     private String name;
     private int health;
-    private int damagerpersec;
     private int damage;
+    private int damagepersec;
     private int cost;
     private int sunpersec;
     private String effect;
     private String pathimage;
 
-    public Plant() {
-    }
+    public Plant(){}
 
-    public Plant(Long id, String name, int health, int damage, int cost, int sunpersec, String effect, String pathimage) {
-        this.id = id;
+    public Plant(int idPlant, String name, int health, int damage, int damagepersec, int cost, int sunpersec, String effect, String pathimage) {
+        this.idPlant = idPlant;
         this.name = name;
         this.health = health;
         this.damage = damage;
+        this.damagepersec = damagepersec;
         this.cost = cost;
         this.sunpersec = sunpersec;
         this.effect = effect;
         this.pathimage = pathimage;
     }
 
-    public Long getId() {
-        return id;
+    public int getIdPlant() {
+        return idPlant;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPlant(int idPlant) {
+        this.idPlant = idPlant;
     }
 
     public String getName() {
@@ -49,12 +49,12 @@ public class Plant {
         this.health = health;
     }
 
-    public void setDamagerpersec(int damagerpersec) {
-        this.damagerpersec = damagerpersec;
+    public void setDamagepersec(int damagepersec) {
+        this.damagepersec = damagepersec;
     }
 
-    public int getDamagerpersec() {
-        return damagerpersec;
+    public int getDamagepersec() {
+        return damagepersec;
     }
 
     public void setDamage(int damage) {
@@ -99,10 +99,10 @@ public class Plant {
     @Override
     public String toString() {
         return "Plant{" +
-                "id=" + id +
+                "idPlant=" + idPlant +
                 ", name='" + name + '\'' +
                 ", health=" + health +
-                ", damage per second=" + damagerpersec +
+                ", damage per second=" + damagepersec +
                 ", damage=" + damage +
                 ", cost=" + cost +
                 ", sun per second=" + sunpersec +

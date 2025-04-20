@@ -3,101 +3,121 @@ package com.epf.API.Controller;
 import com.epf.API.DTO.PlantDTO;
 import com.epf.CORE.interfaceService.PlantService;
 import com.epf.CORE.models.Plant;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/plants")
+@RequestMapping("/plantes")
+@CrossOrigin(origins = "http://localhost:5173")
 public class PlantController {
-
     private final PlantService plantService;
 
     public PlantController(PlantService plantService) {
         this.plantService = plantService;
     }
 
-    // Conversion de l'entité Plant en PlantDTO
-    private PlantDTO convertToDTO(Plant plant) {
-        // On utilise le constructeur de PlantDTO puis on affecte damagerpersec via le setter
-        PlantDTO dto = new PlantDTO(
-                plant.getId(),
-                plant.getName(),
-                plant.getHealth(),
-                plant.getDamage(),
-                plant.getCost(),
-                plant.getSunpersec(),
-                plant.getEffect(),
-                plant.getPathimage()
-        );
-        dto.setDamagerpersec(plant.getDamagerpersec());
-        return dto;
-    }
-
-    // Conversion de PlantDTO en entité Plant
-    private Plant convertToEntity(PlantDTO dto) {
-        Plant plant = new Plant();
-        plant.setId(dto.getId());
-        plant.setName(dto.getName());
-        plant.setHealth(dto.getHealth());
-        plant.setDamage(dto.getDamage());
-        plant.setCost(dto.getCost());
-        plant.setSunpersec(dto.getSunpersec());
-        plant.setEffect(dto.getEffect());
-        plant.setPathimage(dto.getPathimage());
-        plant.setDamagerpersec(dto.getDamagerpersec());
-        return plant;
-    }
-
     // Récupérer toutes les plantes
     @GetMapping
     public ResponseEntity<List<PlantDTO>> getAllPlants() {
-        List<Plant> plants = plantService.findAll();
-        List<PlantDTO> dtos = plants.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        List<Plant> plants = plantService.getAllPlants();
+        List<PlantDTO> plantDTOs = plants.stream()
+            .map(p -> new PlantDTO(
+                p.getIdPlant(),
+                p.getName(),
+                p.getHealth(),
+                p.getDamage(),
+                p.getDamagepersec(),
+                p.getCost(),
+                p.getSunpersec(),
+                p.getEffect(),
+                p.getPathimage()
+            ))
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(plantDTOs);
     }
 
     // Récupérer une plante par son ID
     @GetMapping("/{id}")
-    public ResponseEntity<PlantDTO> getPlantById(@PathVariable Long id) {
-        Optional<Plant> plantOptional = plantService.findById(id);
-        if (plantOptional.isPresent()) {
-            return new ResponseEntity<>(convertToDTO(plantOptional.get()), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<PlantDTO> getPlantById(@PathVariable("id") int id) {
+        Plant plant = plantService.getAllPlants().stream()
+            .filter(p -> p.getIdPlant() == id)
+            .findFirst()
+            .orElse(null);
+            
+        if (plant == null) {
+            return ResponseEntity.notFound().build();
         }
+
+        PlantDTO plantDTO = new PlantDTO(
+            plant.getIdPlant(),
+            plant.getName(),
+            plant.getHealth(),
+            plant.getDamage(),
+            plant.getDamagepersec(),
+            plant.getCost(),
+            plant.getSunpersec(),
+            plant.getEffect(),
+            plant.getPathimage()
+        );
+        
+        return ResponseEntity.ok(plantDTO);
     }
 
     // Créer une nouvelle plante
     @PostMapping
-    public ResponseEntity<Void> createPlant(@RequestBody PlantDTO plantDTO) {
-        Plant plant = convertToEntity(plantDTO);
+    public ResponseEntity<PlantDTO> createPlant(@RequestBody PlantDTO plantDTO) {
+        Plant plant = new Plant(
+            plantDTO.getId(),
+            plantDTO.getName(),
+            plantDTO.getHealth(),
+            plantDTO.getDamage(),
+            plantDTO.getDamagepersec(),
+            plantDTO.getCost(),
+            plantDTO.getSunpersec(),
+            plantDTO.getEffect(),
+            plantDTO.getPathimage()
+        );
+
         plantService.create(plant);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok(plantDTO);
     }
 
     // Mettre à jour une plante existante
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updatePlant(@PathVariable Long id, @RequestBody PlantDTO plantDTO) {
-        Plant plant = convertToEntity(plantDTO);
-        plant.setId(id);  // S'assurer que l'ID correspond à celui du chemin
+    public ResponseEntity<PlantDTO> updatePlant(@PathVariable("id") int id, @RequestBody PlantDTO plantDTO) {
+        Plant plant = new Plant(
+            plantDTO.getId(),
+            plantDTO.getName(),
+            plantDTO.getHealth(),
+            plantDTO.getDamage(),
+            plantDTO.getDamagepersec(),
+            plantDTO.getCost(),
+            plantDTO.getSunpersec(),
+            plantDTO.getEffect(),
+            plantDTO.getPathimage()
+        );
+        // S'assurer que l'ID correspond à celui du chemin
+        plant.setIdPlant(id);
         plantService.update(plant);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(plantDTO);
     }
 
     // Supprimer une plante
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlant(@PathVariable Long id) {
-        boolean deleted = plantService.deleteById(id);
-        return deleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> deletePlant(@PathVariable("id") int id) {
+        Plant plant = plantService.getAllPlants().stream()
+        .filter(p -> p.getIdPlant() == id)
+        .findFirst()
+        .orElse(null);
+    
+        if (plant == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        plantService.delete(plant);
+        return ResponseEntity.ok().build();
     }
 }
 

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class MapDaoImpl implements MapDao {
@@ -25,48 +24,33 @@ public class MapDaoImpl implements MapDao {
         @Override
         public Map mapRow(ResultSet rs, int rowNum) throws SQLException {
             Map gameMap = new Map();
-            gameMap.setId(rs.getLong("id"));
-            gameMap.setRows(rs.getInt("rows"));
-            gameMap.setColumns(rs.getInt("columns"));
-            gameMap.setPathimage(rs.getString("pathimage"));
+            gameMap.setId(rs.getLong("id_map"));
+            gameMap.setRows(rs.getInt("ligne"));
+            gameMap.setColumns(rs.getInt("colonne"));
+            gameMap.setPathimage(rs.getString("chemin_image"));
             return gameMap;
         }
     }
 
-    @Override
     public Map create(Map gameMap) {
-        String sql = "INSERT INTO maps (rows, columns, pathimage) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO map (ligne, colonne, chemin_image) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, gameMap.getRows(), gameMap.getColumns(), gameMap.getPathimage());
         return gameMap;
     }
 
-    @Override
-    public Optional<Map> findById(Long id) {
-        String sql = "SELECT id, rows, columns, pathimage FROM maps WHERE id = ?";
-        try {
-            Map gameMap = jdbcTemplate.queryForObject(sql, new MapRowMapper(), id);
-            return Optional.ofNullable(gameMap);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public List<Map> findAll() {
-        String sql = "SELECT id, rows, columns, pathimage FROM maps";
+    public List<Map> getAllMaps() {
+        String sql = "SELECT id_map, ligne, colonne, chemin_image FROM map";
         return jdbcTemplate.query(sql, new MapRowMapper());
     }
 
-    @Override
     public Map update(Map gameMap) {
-        String sql = "UPDATE maps SET rows = ?, columns = ?, pathimage = ? WHERE id = ?";
+        String sql = "UPDATE map SET ligne = ?, colonne = ?, chemin_image = ? WHERE id_map = ?";
         jdbcTemplate.update(sql, gameMap.getRows(), gameMap.getColumns(), gameMap.getPathimage(), gameMap.getId());
         return gameMap;
     }
 
-    @Override
     public boolean deleteById(Long id) {
-        String sql = "DELETE FROM maps WHERE id = ?";
+        String sql = "DELETE FROM map WHERE id_map = ?";
         return jdbcTemplate.update(sql, id) > 0;
     }
 }
