@@ -1,113 +1,100 @@
 package com.epf.CORE.models;
 
 public class Plant {
-    private int idPlant;
-    private String name;
-    private int health;
-    private int damage;
-    private int damagepersec;
-    private int cost;
-    private int sunpersec;
-    private String effect;
-    private String pathimage;
+    private int id_plante;
+    private String nom;
+    private int point_de_vie;
+    private double attaque_par_seconde;
+    private int degat_attaque;
+    private int cout;
+    private double soleil_par_seconde;
+    private String effet;
+    private String chemin_image;
 
     public Plant(){}
 
-    public Plant(int idPlant, String name, int health, int damage, int damagepersec, int cost, int sunpersec, String effect, String pathimage) {
-        this.idPlant = idPlant;
-        this.name = name;
-        this.health = health;
-        this.damage = damage;
-        this.damagepersec = damagepersec;
-        this.cost = cost;
-        this.sunpersec = sunpersec;
-        this.effect = effect;
-        this.pathimage = pathimage;
+    public Plant(int id_plante, String nom, int point_de_vie, double attaque_par_seconde, int degat_attaque, int cout, double soleil_par_seconde, String effet, String chemin_image) {
+        this.id_plante = id_plante;
+        this.nom = nom;
+        this.point_de_vie = point_de_vie;
+        this.attaque_par_seconde = attaque_par_seconde;
+        this.degat_attaque = degat_attaque;
+        this.cout = cout;
+        this.soleil_par_seconde = soleil_par_seconde;
+        this.effet = effet;
+        this.chemin_image = chemin_image;
     }
 
-    public int getIdPlant() {
-        return idPlant;
+    public int getId_plante() {
+        return id_plante;
     }
 
-    public void setIdPlant(int idPlant) {
-        this.idPlant = idPlant;
+    public void setId_plante(int id_plante) {
+        this.id_plante = id_plante;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public int getHealth() {
-        return health;
+    public int getPoint_de_vie() {
+        return point_de_vie;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setPoint_de_vie(int point_de_vie) {
+        this.point_de_vie = point_de_vie;
     }
 
-    public void setDamagepersec(int damagepersec) {
-        this.damagepersec = damagepersec;
+    public void setAttaque_par_seconde(double attaque_par_seconde) {
+        this.attaque_par_seconde = attaque_par_seconde;
     }
 
-    public int getDamagepersec() {
-        return damagepersec;
+    public double getAttaque_par_seconde() {
+        return attaque_par_seconde;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setDegat_attaque(int degat_attaque) {
+        this.degat_attaque = degat_attaque;
     }
 
-    public int getDamage(){
-        return damage;
+    public int getDegat_attaque(){
+        return degat_attaque;
     }
 
-    public int getCost() {
-        return cost;
+    public int getCout() {
+        return cout;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setCout(int cout) {
+        this.cout = cout;
     }
 
-    public int getSunpersec() {
-        return sunpersec;
+    public double getSoleil_par_seconde() {
+        return soleil_par_seconde;
     }
 
-    public void setSunpersec(int sunpersec) {
-        this.sunpersec = sunpersec;
+    public void setSoleil_par_seconde(double soleil_par_seconde) {
+        this.soleil_par_seconde = soleil_par_seconde;
     }
 
-    public String getEffect() {
-        return effect;
+    public String getEffet() {
+        return effet;
     }
 
-    public void setEffect(String effect) {
-        this.effect = effect;
+    public void setEffet(String effet) {
+        this.effet = effet;
     }
 
-    public String getPathimage() {
-        return pathimage;
+    public String getChemin_image() {
+        return chemin_image;
     }
 
-    public void setPathimage(String pathimage) {
-        this.pathimage = pathimage;
-    }
-    @Override
-    public String toString() {
-        return "Plant{" +
-                "idPlant=" + idPlant +
-                ", name='" + name + '\'' +
-                ", health=" + health +
-                ", damage per second=" + damagepersec +
-                ", damage=" + damage +
-                ", cost=" + cost +
-                ", sun per second=" + sunpersec +
-                ", effect='" + effect + '\'' +
-                ", path image='" + pathimage + '\'' +
-                '}';
+    public void setChemin_image(String chemin_image) {
+        this.chemin_image = chemin_image;
     }
 }
+

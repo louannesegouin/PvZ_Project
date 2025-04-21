@@ -1,89 +1,89 @@
 package com.epf.API.DTO;
 
 public class ZombieDTO {
-    private Long id;
-    private String name;
-    private int health;
-    private int damagepersec;
-    private int damage;
-    private int speed;
-    private String pathimage;
-    private String idmap;
+    private int id_zombie;
+    private String nom;
+    private int point_de_vie;
+    private int attaque_par_seconde;
+    private int degat_attaque;
+    private int vitesse_de_deplacement;
+    private String chemin_image;
+    private String id_map;
 
     // Constructeurs, getters et setters
-    public ZombieDTO(Long id, String name, int health, int damagepersec, int damage, int speed, String pathimage, String idmap) {
-        this.id = id;
-        this.name = name;
-        this.health = health;
-        this.damagepersec = damagepersec;
-        this.damage = damage;
-        this.speed = speed;
-        this.pathimage = pathimage;
-        this.idmap = idmap;
+    public ZombieDTO(int id_zombie, String nom, int point_de_vie, int attaque_par_seconde, int degat_attaque, int vitesse_de_deplacement, String chemin_image, String id_map) {
+        this.id_zombie = id_zombie;
+        this.nom = nom;
+        this.point_de_vie = point_de_vie;
+        this.attaque_par_seconde = attaque_par_seconde;
+        this.degat_attaque = degat_attaque;
+        this.vitesse_de_deplacement = vitesse_de_deplacement;
+        this.chemin_image = chemin_image;
+        this.id_map = id_map;
     }
 
-    public Long getId() {
-        return id;
+    public int getId() {
+        return id_zombie;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(int id) {
+        this.id_zombie = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public int getHealth() {
-        return health;
+    public int getPoint_de_vie() {
+        return point_de_vie;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setPoint_de_vie(int point_de_vie) {
+        this.point_de_vie = point_de_vie;
     }
 
-    public int getDamage() {
-        return damage;
+    public int getDegat_attaque() {
+        return degat_attaque;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setDegat_attaque(int degat_attaque) {
+        this.degat_attaque = degat_attaque;
     }
 
-    public int getDamagepersec(){
-        return damagepersec;
+    public int getAttaque_par_seconde(){
+        return attaque_par_seconde;
     }
 
-    public void setDamagepersec(int damagepersec) {
-        this.damagepersec = damagepersec;
+    public void setAttaque_par_seconde(int attaque_par_seconde) {
+        this.attaque_par_seconde = attaque_par_seconde;
     }
 
-    public int getSpeed(){
-        return speed;
+    public int getVitesse_de_deplacement(){
+        return vitesse_de_deplacement;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setVitesse_de_deplacement(int vitesse_de_deplacement) {
+        this.vitesse_de_deplacement = vitesse_de_deplacement;
     }
 
-    public String getPathimage() {
-        return pathimage;
+    public String getChemin_image() {
+        return chemin_image;
     }
 
-    public void setPathimage(String pathimage) {
-        this.pathimage = pathimage;
+    public void setChemin_image(String chemin_image) {
+        this.chemin_image = chemin_image;
     }
 
-    public String getIdmap() {
-        return idmap;
+    public String getId_map() {
+        return id_map;
     }
 
-    public void setIdmap(String idmap) {
-        this.idmap = idmap;
+    public void setId_map(String id_map) {
+        this.id_map = id_map;
     }
 }
 

@@ -16,23 +16,19 @@ public class ZombieServiceImpl implements ZombieService {
         this.zombieDao = zombieDao;
     }
 
-    @Override
-    public Zombie create(Zombie zombie) {
-        return zombieDao.create(zombie);
+    public void create(Zombie zombie) {
+        zombieDao.create(zombie);
     }
 
-    @Override
     public List<Zombie> getAllZombies() {
         return zombieDao.getAllZombies();
     }
 
-    @Override
-    public Zombie update(Zombie zombie) {
-        return zombieDao.update(zombie);
+    public void update(Zombie zombie) {
+        zombieDao.update(zombie);
     }
 
-    @Override
-    public boolean deleteById(Long id) {
-        return zombieDao.deleteById(id);
+    public void delete(Zombie zombie) {
+        zombieDao.delete(zombie);
     }
 }

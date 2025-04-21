@@ -3,16 +3,14 @@ package com.epf.API.Controller;
 import com.epf.API.DTO.ZombieDTO;
 import com.epf.CORE.interfaceService.ZombieService;
 import com.epf.CORE.models.Zombie;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/zombies")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ZombieController {
 
     private final ZombieService zombieService;
@@ -21,67 +19,101 @@ public class ZombieController {
         this.zombieService = zombieService;
     }
 
-    // Méthode utilitaire pour convertir une entité Zombie en ZombieDTO
-    private ZombieDTO convertToDTO(Zombie zombie) {
-        return new ZombieDTO(
-                zombie.getId(),
-                zombie.getName(),
-                zombie.getHealth(),
-                zombie.getDamagepersec(),
-                zombie.getDamage(),
-                zombie.getSpeed(),
-                zombie.getPathimage(),
-                zombie.getIdmap()
-        );
-    }
-
-    // Méthode utilitaire pour convertir un ZombieDTO en entité Zombie
-    private Zombie convertToEntity(ZombieDTO zombieDTO) {
-        return new Zombie(
-                zombieDTO.getId(),
-                zombieDTO.getName(),
-                zombieDTO.getHealth(),
-                zombieDTO.getDamagepersec(),
-                zombieDTO.getDamage(),
-                zombieDTO.getSpeed(),
-                zombieDTO.getPathimage(),
-                zombieDTO.getIdmap()
-        );
-    }
-
     // Récupérer tous les zombies
     @GetMapping
     public ResponseEntity<List<ZombieDTO>> getAllZombies() {
         List<Zombie> zombies = zombieService.getAllZombies();
         List<ZombieDTO> zombieDTOs = zombies.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(zombieDTOs, HttpStatus.OK);
+            .map(z -> new ZombieDTO(
+                z.getId_zombie(),
+                z.getNom(),
+                z.getPoint_de_vie(),
+                z.getAttaque_par_seconde(),
+                z.getDegat_attaque(),
+                z.getVitesse_de_deplacement(),
+                z.getChemin_image(),
+                z.getId_map()
+            ))
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(zombieDTOs);
+    }
+
+    // Récupérer un zombie par son ID
+    @GetMapping("/{id}")
+    public ResponseEntity<ZombieDTO> getZombieById(@PathVariable("id") int id) {
+        Zombie zombie = zombieService.getAllZombies().stream()
+            .filter(z -> z.getId_zombie() == id)
+            .findFirst()
+            .orElse(null);
+            
+        if (zombie == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ZombieDTO ZombieDTO = new ZombieDTO(
+            zombie.getId_zombie(),
+            zombie.getNom(),
+            zombie.getPoint_de_vie(),
+            zombie.getAttaque_par_seconde(),
+            zombie.getDegat_attaque(),
+            zombie.getVitesse_de_deplacement(),
+            zombie.getChemin_image(),
+            zombie.getId_map()
+        );
+        
+        return ResponseEntity.ok(ZombieDTO);
     }
 
     // Créer un nouveau zombie
     @PostMapping
-    public ResponseEntity<Void> createZombie(@RequestBody ZombieDTO zombieDTO) {
-        Zombie zombie = convertToEntity(zombieDTO);
+    public ResponseEntity<ZombieDTO> createZombie(@RequestBody ZombieDTO zombieDTO) {
+        Zombie zombie = new Zombie(
+            zombieDTO.getId(),
+            zombieDTO.getNom(),
+            zombieDTO.getPoint_de_vie(),
+            zombieDTO.getAttaque_par_seconde(),
+            zombieDTO.getDegat_attaque(),
+            zombieDTO.getVitesse_de_deplacement(),
+            zombieDTO.getChemin_image(),
+            zombieDTO.getId_map()
+        );
+
         zombieService.create(zombie);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok(zombieDTO);
     }
 
-    // Mettre à jour un zombie
+    // Mettre à jour un zombie existant
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateZombie(@PathVariable Long id, @RequestBody ZombieDTO zombieDTO) {
-        Zombie zombie = convertToEntity(zombieDTO);
-        // S'assurer que l'ID de l'entité correspond à l'ID du chemin
-        zombie.setId(id);
+    public ResponseEntity<ZombieDTO> updateZombie(@PathVariable("id") int id, @RequestBody ZombieDTO zombieDTO) {
+        Zombie zombie = new Zombie(
+            zombieDTO.getId(),
+            zombieDTO.getNom(),
+            zombieDTO.getPoint_de_vie(),
+            zombieDTO.getAttaque_par_seconde(),
+            zombieDTO.getDegat_attaque(),
+            zombieDTO.getVitesse_de_deplacement(),
+            zombieDTO.getChemin_image(),
+            zombieDTO.getId_map()
+        );
+        // S'assurer que l'ID correspond à celui du chemin
+        zombie.setId_zombie(id);
         zombieService.update(zombie);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(zombieDTO);
     }
 
-    // Supprimer un zombie
+    // Supprimer un zombie 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteZombie(@PathVariable Long id) {
-        boolean deleted = zombieService.deleteById(id);
-        return deleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> deleteZombie(@PathVariable("id") int id) {
+        Zombie zombie = zombieService.getAllZombies().stream()
+        .filter(z -> z.getId_zombie() == id)
+        .findFirst()
+        .orElse(null);
+    
+        if (zombie == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        zombieService.delete(zombie);
+        return ResponseEntity.ok().build();
     }
 }

@@ -16,16 +16,16 @@ public class PlantDaoImpl implements PlantDao {
     }
 
     public void create(Plant plant) {
-        String sql = "INSERT INTO plante (nom, point_de_vie, degat_attaque, attaque_par_seconde, cout, soleil_par_seconde, effet, chemin_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO plante (nom, point_de_vie, attaque_par_seconde, degat_attaque, cout, soleil_par_seconde, effet, chemin_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, 
-            plant.getName(), 
-            plant.getHealth(), 
-            plant.getDamage(),
-            plant.getDamagepersec(),
-            plant.getCost(), 
-            plant.getSunpersec(), 
-            plant.getEffect(), 
-            plant.getPathimage()
+            plant.getNom(),
+            plant.getPoint_de_vie(),
+            plant.getAttaque_par_seconde(),
+            plant.getDegat_attaque(),
+            plant.getCout(),
+            plant.getSoleil_par_seconde(),
+            plant.getEffet(),
+            plant.getChemin_image()
         );
     }
 
@@ -35,8 +35,8 @@ public class PlantDaoImpl implements PlantDao {
             rs.getInt("id_plante"),
             rs.getString("nom"),
             rs.getInt("point_de_vie"),
-            rs.getInt("degat_attaque"),
             rs.getInt("attaque_par_seconde"),
+            rs.getInt("degat_attaque"),
             rs.getInt("cout"),
             rs.getInt("soleil_par_seconde"),
             rs.getString("effet"),
@@ -47,22 +47,22 @@ public class PlantDaoImpl implements PlantDao {
     }
 
     public void update(Plant plant) {
-        String sql = "UPDATE plante SET nom = ?, point_de_vie = ?, degat_attaque = ?, attaque_par_seconde = ?, cout = ?, soleil_par_seconde = ?, effet = ?, chemin_image = ? WHERE id_plante = ?";
+        String sql = "UPDATE plante SET nom = ?, point_de_vie = ?, attaque_par_seconde = ?, degat_attaque = ?, cout = ?, soleil_par_seconde = ?, effet = ?, chemin_image = ? WHERE id_plante = ?";
         jdbcTemplate.update(sql, 
-            plant.getName(), 
-            plant.getHealth(), 
-            plant.getDamage(),
-            plant.getDamagepersec(),
-            plant.getCost(), 
-            plant.getSunpersec(), 
-            plant.getEffect(), 
-            plant.getPathimage(),
-            plant.getIdPlant()
+            plant.getNom(),
+            plant.getPoint_de_vie(),
+            plant.getAttaque_par_seconde(),
+            plant.getDegat_attaque(),
+            plant.getCout(),
+            plant.getSoleil_par_seconde(),
+            plant.getEffet(),
+            plant.getChemin_image(),
+            plant.getId_plante()
         );
     }
 
     public void delete(Plant plant) {
         String sql = "DELETE FROM plante WHERE id_plante = ?";
-        jdbcTemplate.update(sql, plant.getIdPlant());
+        jdbcTemplate.update(sql, plant.getId_plante());
     }
 }

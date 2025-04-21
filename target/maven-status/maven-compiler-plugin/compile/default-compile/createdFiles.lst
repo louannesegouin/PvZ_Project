@@ -14,7 +14,6 @@ com\epf\Config\AppInitializer.class
 com\epf\API\DTO\MapDTO.class
 com\epf\CORE\interfaceService\PlantService.class
 com\epf\PERSISTANCE\Config\DataBaseConfiguration.class
-com\epf\PERSISTANCE\ImplementationDAO\ZombieDaoImpl$ZombieRowMapper.class
 com\epf\CORE\models\Zombie.class
 com\epf\PERSISTANCE\InterfaceDAO\PlantDao.class
 com\epf\API\Controller\ZombieController.class
