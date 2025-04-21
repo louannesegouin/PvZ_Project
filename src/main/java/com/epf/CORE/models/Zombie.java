@@ -8,12 +8,12 @@ public class Zombie {
     private int degat_attaque;
     private int vitesse_de_deplacement;
     private String chemin_image;
-    private String id_map;
+    private int id_map;
 
     public Zombie() {
     }
 
-    public Zombie(int id_zombie, String nom, int point_de_vie, int attaque_par_seconde, int degat_attaque, int vitesse_de_deplacement, String chemin_image, String id_map) {
+    public Zombie(int id_zombie, String nom, int point_de_vie, int attaque_par_seconde, int degat_attaque, int vitesse_de_deplacement, String chemin_image, int id_map) {
         this.id_zombie = id_zombie;
         this.nom = nom;
         this.point_de_vie = point_de_vie;
@@ -80,11 +80,11 @@ public class Zombie {
         this.chemin_image = chemin_image;
     }
 
-    public String getId_map() {
+    public int getId_map() {
         return id_map;
     }
 
-    public void setId_map(String id_map) {
+    public void setId_map(int id_map) {
         this.id_map = id_map;
     }
 }

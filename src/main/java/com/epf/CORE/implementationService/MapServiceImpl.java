@@ -14,24 +14,20 @@ public class MapServiceImpl implements MapService {
     public MapServiceImpl(MapDao mapDao) {
         this.mapDao = mapDao;
     }
-
-    @Override
-    public Map create(Map map) {
-        return mapDao.create(map);
+    
+    public void create(Map map) {
+        mapDao.create(map);
     }
 
-    @Override
     public List<Map> getAllMaps() {
         return mapDao.getAllMaps();
     }
 
-    @Override
-    public Map update(Map map) {
-        return mapDao.update(map);
+    public void update(Map map) {
+        mapDao.update(map);
     }
 
-    @Override
-    public boolean deleteById(Long id) {
-        return mapDao.deleteById(id);
+    public void delete(Map map) {
+        mapDao.delete(map);
     }
 }

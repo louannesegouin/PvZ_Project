@@ -1,7 +1,6 @@
 com\epf\PERSISTANCE\InterfaceDAO\MapDao.class
 com\epf\CORE\implementationService\PlantServiceImpl.class
 com\epf\CORE\implementationService\MapServiceImpl.class
-com\epf\PERSISTANCE\ImplementationDAO\MapDaoImpl$MapRowMapper.class
 com\epf\API\DTO\ZombieDTO.class
 com\epf\Config\WebConfig.class
 com\epf\CORE\models\Plant.class

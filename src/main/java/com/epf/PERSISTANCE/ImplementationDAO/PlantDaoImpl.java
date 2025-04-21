@@ -42,7 +42,6 @@ public class PlantDaoImpl implements PlantDao {
             rs.getString("effet"),
             rs.getString("chemin_image")
         );
-
         return jdbcTemplate.query(sql, RowMapper);
     }
 

@@ -8,10 +8,10 @@ public class ZombieDTO {
     private int degat_attaque;
     private int vitesse_de_deplacement;
     private String chemin_image;
-    private String id_map;
+    private int id_map;
 
     // Constructeurs, getters et setters
-    public ZombieDTO(int id_zombie, String nom, int point_de_vie, int attaque_par_seconde, int degat_attaque, int vitesse_de_deplacement, String chemin_image, String id_map) {
+    public ZombieDTO(int id_zombie, String nom, int point_de_vie, int attaque_par_seconde, int degat_attaque, int vitesse_de_deplacement, String chemin_image, int id_map) {
         this.id_zombie = id_zombie;
         this.nom = nom;
         this.point_de_vie = point_de_vie;
@@ -22,11 +22,11 @@ public class ZombieDTO {
         this.id_map = id_map;
     }
 
-    public int getId() {
+    public int getId_zombie() {
         return id_zombie;
     }
 
-    public void setId(int id) {
+    public void setId_zombie(int id) {
         this.id_zombie = id;
     }
 
@@ -78,11 +78,11 @@ public class ZombieDTO {
         this.chemin_image = chemin_image;
     }
 
-    public String getId_map() {
+    public int getId_map() {
         return id_map;
     }
 
-    public void setId_map(String id_map) {
+    public void setId_map(int id_map) {
         this.id_map = id_map;
     }
 }

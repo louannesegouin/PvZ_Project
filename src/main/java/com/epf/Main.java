@@ -47,9 +47,9 @@ public class Main {
     private static void displayMaps(List<Map> maps) {
         System.out.println("\n=== MAPS ===");
         for (Map map : maps) {
-            System.out.println("ID: " + map.getId());
-            System.out.println("Lignes: " + map.getRows());
-            System.out.println("Colonnes: " + map.getColumns());
+            System.out.println("ID: " + map.getId_Map());
+            System.out.println("Lignes: " + map.getLigne());
+            System.out.println("Colonnes: " + map.getColonne());
             System.out.println("--------------------");
         }
     }

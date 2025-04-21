@@ -1,49 +1,51 @@
 package com.epf.API.DTO;
 
 public class MapDTO {
-    private Long id;
-    private int rows;
-    private int columns;
-    private String pathimage;
+    private int id_map;
+    private int ligne;
+    private int colonne;
+    private String chemin_image;
 
     // Constructeurs, getters et setters
-    public MapDTO(Long id, int rows, int columns, String pathimage) {
-        this.id = id;
-        this.rows = rows;
-        this.columns = columns;
-        this.pathimage = pathimage;
+    public MapDTO(){}
+
+    public MapDTO(int id_map, int ligne, int colonne, String chemin_image) {
+        this.id_map = id_map;
+        this.ligne = ligne;
+        this.colonne = colonne;
+        this.chemin_image = chemin_image;
     }
 
-    public Long getId() {
-        return id;
+    public int getId() {
+        return id_map;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(int id) {
+        this.id_map = id;
     }
 
-    public int getRows() {
-        return rows;
+    public int getLigne() {
+        return ligne;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
+    public void setLigne(int ligne) {
+        this.ligne = ligne;
     }
 
-    public int getColumns() {
-        return columns;
+    public int getColonne() {
+        return colonne;
     }
 
-    public void setColumns(int columns) {
-        this.columns = columns;
+    public void setColonne(int colonne) {
+        this.colonne = colonne;
     }
 
-    public String getPathimage() {
-        return pathimage;
+    public String getChemin_image() {
+        return chemin_image;
     }
 
-    public void setPathimage(String pathimage) {
-        this.pathimage = pathimage;
+    public void setChemin_image(String chemin_image) {
+        this.chemin_image = chemin_image;
     }
 }
 
