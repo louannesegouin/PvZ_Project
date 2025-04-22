@@ -62,7 +62,7 @@ public class MapController {
     @PostMapping
     public ResponseEntity<MapDTO> createMap(@RequestBody MapDTO mapDTO) {
         Map map = new Map(
-            mapDTO.getId(),
+            mapDTO.getId_map(),
             mapDTO.getLigne(),
             mapDTO.getColonne(),
             mapDTO.getChemin_image()
@@ -87,7 +87,7 @@ public class MapController {
 
     // Supprimer une map
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMap(@PathVariable("id") int id) {
+    public ResponseEntity<Void> deleteMap(@PathVariable("id_map") int id) {
         Map map = mapService.getAllMaps().stream()
         .filter(m -> m.getId_Map() == id)
         .findFirst()

@@ -88,7 +88,7 @@ public class ZombieController {
     public ResponseEntity<ZombieDTO> updateZombie(@PathVariable("id") int id, @RequestBody ZombieDTO zombieDTO) {
         // S'assurer que l'ID correspond à celui du chemin
         Zombie zombie = new Zombie(
-            id,
+            zombieDTO.getId_zombie(),
             zombieDTO.getNom(),
             zombieDTO.getPoint_de_vie(),
             zombieDTO.getAttaque_par_seconde(),
@@ -118,6 +118,7 @@ public class ZombieController {
         return ResponseEntity.ok().build();
     }
 
+    // Récupérer les zombies d'une map spécifique
     @GetMapping("/map/{id_map}")
     public ResponseEntity<List<ZombieDTO>> getZombiesFromMap(@PathVariable("id_map") int id_map) {
         Map map = new Map();

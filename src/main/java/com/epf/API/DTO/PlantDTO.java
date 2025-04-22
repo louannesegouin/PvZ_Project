@@ -26,11 +26,11 @@ public class PlantDTO {
         this.chemin_image = chemin_image;
     }
 
-    public int getId() {
+    public int getId_plante() {
         return id_plante;
     }
 
-    public void setId(int id) {
+    public void setId_plante(int id) {
         this.id_plante = id;
     }
 
@@ -62,7 +62,7 @@ public class PlantDTO {
         this.degat_attaque = degat_attaque;
     }
 
-    public int getDegat_Attaque(){
+    public int getDegat_attaque(){
         return degat_attaque;
     }
 

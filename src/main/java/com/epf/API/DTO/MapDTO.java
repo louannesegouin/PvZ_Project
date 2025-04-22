@@ -16,11 +16,11 @@ public class MapDTO {
         this.chemin_image = chemin_image;
     }
 
-    public int getId() {
+    public int getId_map() {
         return id_map;
     }
 
-    public void setId(int id) {
+    public void setId_map(int id) {
         this.id_map = id;
     }
 

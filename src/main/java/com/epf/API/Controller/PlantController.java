@@ -69,11 +69,11 @@ public class PlantController {
     @PostMapping
     public ResponseEntity<PlantDTO> createPlant(@RequestBody PlantDTO plantDTO) {
         Plant plant = new Plant(
-            plantDTO.getId(),
+            plantDTO.getId_plante(),
             plantDTO.getNom(),
             plantDTO.getPoint_de_vie(),
             plantDTO.getAttaque_par_seconde(),
-            plantDTO.getDegat_Attaque(),
+            plantDTO.getDegat_attaque(),
             plantDTO.getCout(),
             plantDTO.getSoleil_par_seconde(),
             plantDTO.getEffet(),
@@ -88,11 +88,11 @@ public class PlantController {
     @PutMapping("/{id}")
     public ResponseEntity<PlantDTO> updatePlant(@PathVariable("id") int id, @RequestBody PlantDTO plantDTO) {
         Plant plant = new Plant(
-            plantDTO.getId(),
+            plantDTO.getId_plante(),
             plantDTO.getNom(),
             plantDTO.getPoint_de_vie(),
             plantDTO.getAttaque_par_seconde(),
-            plantDTO.getDegat_Attaque(),
+            plantDTO.getDegat_attaque(),
             plantDTO.getCout(),
             plantDTO.getSoleil_par_seconde(),
             plantDTO.getEffet(),

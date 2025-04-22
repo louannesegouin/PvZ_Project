@@ -10,9 +10,6 @@ public class Zombie {
     private String chemin_image;
     private int id_map;
 
-    public Zombie() {
-    }
-
     public Zombie(int id_zombie, String nom, int point_de_vie, int attaque_par_seconde, int degat_attaque, int vitesse_de_deplacement, String chemin_image, int id_map) {
         this.id_zombie = id_zombie;
         this.nom = nom;
@@ -22,6 +19,17 @@ public class Zombie {
         this.vitesse_de_deplacement = vitesse_de_deplacement;
         this.chemin_image = chemin_image;
         this.id_map = id_map;
+    }
+
+    public Zombie(Zombie zombie) {
+        this.id_zombie = zombie.id_zombie;
+        this.nom = zombie.nom;
+        this.point_de_vie = zombie.point_de_vie;
+        this.attaque_par_seconde = zombie.attaque_par_seconde;
+        this.degat_attaque = zombie.degat_attaque;
+        this.vitesse_de_deplacement = zombie.vitesse_de_deplacement;
+        this.chemin_image = zombie.chemin_image;
+        this.id_map = zombie.id_map;
     }
 
     public int getId_zombie() {
