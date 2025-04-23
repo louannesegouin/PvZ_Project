@@ -32,6 +32,19 @@ public class Zombie {
         this.id_map = zombie.id_map;
     }
 
+    public Zombie() {
+        // Initialize fields with default values
+        this.id_zombie = 0;
+        this.nom = "";
+        this.point_de_vie = 0;
+        this.attaque_par_seconde = 0;
+        this.degat_attaque = 0;
+        this.vitesse_de_deplacement = 0;
+        this.chemin_image = "";
+        this.id_map = 0;
+    }
+
+
     public int getId_zombie() {
         return id_zombie;
     }
@@ -53,6 +66,9 @@ public class Zombie {
     }
 
     public void setPoint_de_vie(int point_de_vie) {
+        if (point_de_vie < 0) {
+            throw new IllegalArgumentException("Les points de vie ne peuvent pas être négatifs");
+        }
         this.point_de_vie = point_de_vie;
     }
 
@@ -61,6 +77,9 @@ public class Zombie {
     }
 
     public void setDegat_attaque(int degat_attaque) {
+        if (degat_attaque < 0) {
+            throw new IllegalArgumentException("Les dégâts ne peuvent pas être négatifs");
+        }
         this.degat_attaque = degat_attaque;
     }
 
@@ -77,6 +96,9 @@ public class Zombie {
     }
 
     public void setVitesse_de_deplacement(int vitesse_de_deplacement) {
+        if (vitesse_de_deplacement < 0) {
+            throw new IllegalArgumentException("La vitesse ne peut pas être négative");
+        }
         this.vitesse_de_deplacement = vitesse_de_deplacement;
     }
 

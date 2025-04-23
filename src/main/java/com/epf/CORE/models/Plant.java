@@ -46,6 +46,9 @@ public class Plant {
     }
 
     public void setPoint_de_vie(int point_de_vie) {
+        if (point_de_vie < 0) {
+            throw new IllegalArgumentException("Les points de vie ne peuvent pas être négatifs");
+        }
         this.point_de_vie = point_de_vie;
     }
 
@@ -70,6 +73,9 @@ public class Plant {
     }
 
     public void setCout(int cout) {
+        if (cout < 0) {
+            throw new IllegalArgumentException("Le coût ne peut pas être négatif");
+        }
         this.cout = cout;
     }
 
@@ -78,6 +84,9 @@ public class Plant {
     }
 
     public void setSoleil_par_seconde(double soleil_par_seconde) {
+        if (soleil_par_seconde < 0) {
+            throw new IllegalArgumentException("La production de soleil ne peut pas être négative");
+        }
         this.soleil_par_seconde = soleil_par_seconde;
     }
 

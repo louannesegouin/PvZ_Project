@@ -33,6 +33,9 @@ public class Map {
     }
 
     public void setLigne(int ligne) {
+        if (ligne < 0) {
+            throw new IllegalArgumentException("Le nombre de lignes ne peut pas être négatif");
+        }
         this.ligne = ligne;
     }
 
@@ -41,6 +44,9 @@ public class Map {
     }
 
     public void setColonne(int colonne) {
+        if (colonne < 0) {
+            throw new IllegalArgumentException("Le nombre de colonnes ne peut pas être négatif");
+        }
         this.colonne = colonne;
     }
 
