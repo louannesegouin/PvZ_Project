@@ -1,1 +1,3 @@
 com\epf\API\Controller\PlantControllerTest.class
+com\epf\API\Controller\ZombieControllerTest.class
+com\epf\API\Controller\MapControllerTest.class
