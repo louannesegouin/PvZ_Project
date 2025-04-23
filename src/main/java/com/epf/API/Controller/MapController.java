@@ -87,7 +87,7 @@ public class MapController {
 
     // Supprimer une map
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMap(@PathVariable("id_map") int id) {
+    public ResponseEntity<Void> deleteMap(@PathVariable("id") int id) {
         Map map = mapService.getAllMaps().stream()
         .filter(m -> m.getId_Map() == id)
         .findFirst()
