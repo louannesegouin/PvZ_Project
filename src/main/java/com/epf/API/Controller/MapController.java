@@ -21,7 +21,11 @@ public class MapController {
         this.zombieService = zombieService;
     }
 
-    // Récupérer toutes les maps 
+    /**
+     * Récupère toutes les maps existantes dans la base de données
+     * Convertit chaque Map en MapDTO pour l'API
+     * @return Une liste de MapDTO avec le code 200 (OK)
+     */
     @GetMapping
     public ResponseEntity<List<MapDTO>> getAllMaps() {
         List<Map> maps = mapService.getAllMaps();
@@ -36,7 +40,11 @@ public class MapController {
         return ResponseEntity.ok(mapDTOs);
     }
 
-    // Récupérer une map par son ID
+    /**
+     * Récupère une map spécifique par son ID
+     * @param id L'identifiant unique de la map recherchée
+     * @return La MapDTO correspondante si trouvée, sinon retourne 404 (Not Found)
+     */
     @GetMapping("/{id}")
     public ResponseEntity<MapDTO> getMapById(@PathVariable("id") int id) {
         Map map = mapService.getAllMaps().stream()
@@ -58,7 +66,11 @@ public class MapController {
         return ResponseEntity.ok(mapDTO);
     }
 
-    // Créer une nouvelle map
+    /**
+     * Crée une nouvelle map dans la base de données
+     * @param mapDTO Les données de la map à créer
+     * @return La MapDTO créée avec le code 200 (OK)
+     */
     @PostMapping
     public ResponseEntity<MapDTO> createMap(@RequestBody MapDTO mapDTO) {
         Map map = new Map(
@@ -71,7 +83,12 @@ public class MapController {
         return ResponseEntity.ok(mapDTO);
     }
 
-    // Mettre à jour une map existante
+    /**
+     * Met à jour une map existante
+     * @param id L'identifiant de la map à modifier
+     * @param mapDTO Les nouvelles données de la map
+     * @return La MapDTO mise à jour avec le code 200 (OK)
+     */
     @PutMapping("/{id}")
     public ResponseEntity<MapDTO> updateMap(@PathVariable("id") int id, @RequestBody MapDTO mapDTO) {
         Map map = new Map(
@@ -85,7 +102,11 @@ public class MapController {
         return ResponseEntity.ok(mapDTO);
     }
 
-    // Supprimer une map
+    /**
+     * Supprime une map et tous les zombies associés
+     * @param id L'identifiant de la map à supprimer
+     * @return 200 (OK) si supprimé, 404 (Not Found) si la map n'existe pas
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMap(@PathVariable("id") int id) {
         Map map = mapService.getAllMaps().stream()

@@ -20,7 +20,11 @@ public class ZombieController {
         this.zombieService = zombieService;
     }
 
-    // Récupérer tous les zombies
+    /**
+     * Récupère tous les zombies disponibles dans le jeu
+     * Convertit chaque Zombie en ZombieDTO pour l'API
+     * @return Une liste de ZombieDTO avec le code 200 (OK)
+     */
     @GetMapping
     public ResponseEntity<List<ZombieDTO>> getAllZombies() {
         List<Zombie> zombies = zombieService.getAllZombies();
@@ -39,7 +43,11 @@ public class ZombieController {
         return ResponseEntity.ok(zombieDTOs);
     }
 
-    // Récupérer un zombie par son ID
+    /**
+     * Récupère un zombie spécifique par son ID
+     * @param id L'identifiant unique du zombie recherché
+     * @return Le ZombieDTO correspondant si trouvé, sinon retourne 404 (Not Found)
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ZombieDTO> getZombieById(@PathVariable("id") int id) {
         Zombie zombie = zombieService.getAllZombies().stream()
@@ -65,7 +73,11 @@ public class ZombieController {
         return ResponseEntity.ok(zombieDTO);
     }
 
-    // Créer un nouveau zombie
+    /**
+     * Crée un nouveau zombie dans la base de données
+     * @param zombieDTO Les données du zombie à créer
+     * @return Le ZombieDTO créé avec le code 200 (OK)
+     */
     @PostMapping
     public ResponseEntity<ZombieDTO> createZombie(@RequestBody ZombieDTO zombieDTO) {
         Zombie zombie = new Zombie(
@@ -83,7 +95,12 @@ public class ZombieController {
         return ResponseEntity.ok(zombieDTO);
     }
 
-    // Mettre à jour un zombie existant
+    /**
+     * Met à jour un zombie existant
+     * @param id L'identifiant du zombie à modifier
+     * @param zombieDTO Les nouvelles données du zombie
+     * @return Le ZombieDTO mis à jour avec le code 200 (OK)
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ZombieDTO> updateZombie(@PathVariable("id") int id, @RequestBody ZombieDTO zombieDTO) {
         // S'assurer que l'ID correspond à celui du chemin
@@ -102,7 +119,11 @@ public class ZombieController {
         return ResponseEntity.ok(zombieDTO);
     }
 
-    // Supprimer un zombie 
+    /**
+     * Supprime un zombie de la base de données
+     * @param id L'identifiant du zombie à supprimer
+     * @return 200 (OK) si supprimé, 404 (Not Found) si le zombie n'existe pas
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteZombie(@PathVariable("id") int id_map) {
         Zombie zombie = zombieService.getAllZombies().stream()
@@ -118,7 +139,11 @@ public class ZombieController {
         return ResponseEntity.ok().build();
     }
 
-    // Récupérer les zombies d'une map spécifique
+    /**
+     * Récupère tous les zombies associés à une map spécifique
+     * @param id_map L'identifiant de la map
+     * @return Une liste de ZombieDTO présents sur la map avec le code 200 (OK)
+     */
     @GetMapping("/map/{id_map}")
     public ResponseEntity<List<ZombieDTO>> getZombiesFromMap(@PathVariable("id_map") int id_map) {
         Map map = new Map();

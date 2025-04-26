@@ -18,7 +18,11 @@ public class PlantController {
         this.plantService = plantService;
     }
 
-    // Récupérer toutes les plantes
+    /**
+     * Récupère toutes les plantes disponibles dans le jeu
+     * Convertit chaque Plant en PlantDTO pour l'API
+     * @return Une liste de PlantDTO avec le code 200 (OK)
+     */
     @GetMapping
     public ResponseEntity<List<PlantDTO>> getAllPlants() {
         List<Plant> plants = plantService.getAllPlants();
@@ -38,7 +42,11 @@ public class PlantController {
         return ResponseEntity.ok(plantDTOs);
     }
 
-    // Récupérer une plante par son ID
+    /**
+     * Récupère une plante spécifique par son ID
+     * @param id L'identifiant unique de la plante recherchée
+     * @return La PlantDTO correspondante si trouvée, sinon retourne 404 (Not Found)
+     */
     @GetMapping("/{id}")
     public ResponseEntity<PlantDTO> getPlantById(@PathVariable("id") int id) {
         Plant plant = plantService.getAllPlants().stream()
@@ -65,7 +73,11 @@ public class PlantController {
         return ResponseEntity.ok(plantDTO);
     }
 
-    // Créer une nouvelle plante
+    /**
+     * Crée une nouvelle plante dans la base de données
+     * @param plantDTO Les données de la plante à créer
+     * @return La PlantDTO créée avec le code 200 (OK)
+     */
     @PostMapping
     public ResponseEntity<PlantDTO> createPlant(@RequestBody PlantDTO plantDTO) {
         Plant plant = new Plant(
@@ -84,7 +96,12 @@ public class PlantController {
         return ResponseEntity.ok(plantDTO);
     }
 
-    // Mettre à jour une plante existante
+    /**
+     * Met à jour une plante existante
+     * @param id L'identifiant de la plante à modifier
+     * @param plantDTO Les nouvelles données de la plante
+     * @return La PlantDTO mise à jour avec le code 200 (OK)
+     */
     @PutMapping("/{id}")
     public ResponseEntity<PlantDTO> updatePlant(@PathVariable("id") int id, @RequestBody PlantDTO plantDTO) {
         Plant plant = new Plant(
@@ -104,7 +121,11 @@ public class PlantController {
         return ResponseEntity.ok(plantDTO);
     }
 
-    // Supprimer une plante
+    /**
+     * Supprime une plante de la base de données
+     * @param id L'identifiant de la plante à supprimer
+     * @return 200 (OK) si supprimée, 404 (Not Found) si la plante n'existe pas
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlant(@PathVariable("id") int id) {
         Plant plant = plantService.getAllPlants().stream()
